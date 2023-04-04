@@ -2,10 +2,11 @@ import React from 'react';
 import { ListOfContacts } from './ContactList.styled';
 import Contact from '../Contact';
 import { useSelector } from 'react-redux';
+import {getContacts, getFilter} from '../../redux/contactsSlice'
 
 const ContactList = () => {
-  const stateContacts = useSelector(state => state.contacts.contacts);
-  const stateFilterValue = useSelector(state => state.contacts.filter);
+  const stateContacts = useSelector(getContacts);
+  const stateFilterValue = useSelector(getFilter);
 
   const showFilteredContacts = () => {
     return stateContacts.filter(contact =>

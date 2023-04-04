@@ -3,10 +3,12 @@ import FormComponent from './Form';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import { useSelector } from 'react-redux';
+import { getContacts } from '../redux/contactsSlice';
+
 
 
 const App = () => {
-  const stateContacts = useSelector(state => state.contacts.contacts);
+  const stateContacts = useSelector(getContacts);
 
   return (
     <div

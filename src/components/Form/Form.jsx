@@ -10,6 +10,7 @@ import {
 } from './Form.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
+import { getContacts } from '../../redux/contactsSlice';
 
 const initialValues = { name: '', number: '' };
 const schema = yup.object({
@@ -18,7 +19,7 @@ const schema = yup.object({
 });
 
 const FormComponent = () => {
-  const stateContacts = useSelector(state => state.contacts.contacts);
+  const stateContacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
