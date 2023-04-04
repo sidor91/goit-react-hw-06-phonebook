@@ -1,23 +1,23 @@
-import PropTypes from 'prop-types';
 import { FilterLabel, FilterInput, FilterLabelName } from './Filter.styled';
+import { useDispatch } from 'react-redux';
+import { addFilter } from '../../redux/contactsSlice';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+
   return (
     <FilterLabel>
       <FilterLabelName>Find contacts by name</FilterLabelName>
       <FilterInput
         type="text"
         name="filter"
-        onChange={onChange}
-        value={value}
+        onChange={(e) => {
+          dispatch(addFilter(e.target.value));
+        }
+        }
       />
     </FilterLabel>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Filter;

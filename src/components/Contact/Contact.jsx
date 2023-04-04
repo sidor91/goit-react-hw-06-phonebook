@@ -5,22 +5,31 @@ import {
   ContactNumber,
   ContactDeleteButton,
 } from './Contact.styled';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
 
-const Contact = ({ name, number, id, handleDelete }) => (
-  <ContactItem>
-    <ContactName>{name}:</ContactName>
-    <ContactNumber>{number}</ContactNumber>
-    <ContactDeleteButton type="button" onClick={() => handleDelete(id)} id={id}>
-      Delete
-    </ContactDeleteButton>
-  </ContactItem>
-);
+const Contact = ({ name, number, id }) => {
+  const dispatch = useDispatch();
+  return (
+    <ContactItem>
+      <ContactName>{name}:</ContactName>
+      <ContactNumber>{number}</ContactNumber>
+      <ContactDeleteButton
+        type="button"
+        onClick={() =>
+          dispatch(deleteContact(id))
+        }
+      >
+        Delete
+      </ContactDeleteButton>
+    </ContactItem>
+  );
+};
 
 Contact.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  handleDelete: PropTypes.func.isRequired,
 };
 
 export default Contact;

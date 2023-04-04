@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Form, Field } from './Form'
+import { Form, Field } from 'formik';
+
 
 export const FormElement = styled(Form)`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
 `;
 export const Label = styled.label`
 display: flex;

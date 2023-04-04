@@ -1,32 +1,12 @@
-import { useState, useEffect } from 'react';
 import Section from './Section';
 import FormComponent from './Form';
 import ContactList from './ContactList';
 import Filter from './Filter';
+import { useSelector } from 'react-redux';
 
-const localStorageData = JSON.parse(localStorage.getItem('contacts')) || [];
 
 const App = () => {
-  const [contacts, addContatcs] = useState(localStorageData);
-  const [filter, addFilter] = useState('');
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
-
-  const contactDeleteHandler = id => {
-    const updatedArr = contacts.filter(contact => contact.id !== id);
-    addContatcs([...updatedArr]);
-  };
-
-  const showFilteredContacts = () => {
-    const filterToLowerCase = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filterToLowerCase)
-    );
-  };
-
-  const filteredContacts = showFilteredContacts();
+  const stateContacts = useSelector(state => state.contacts.contacts);
 
   return (
     <div
@@ -46,25 +26,12 @@ const App = () => {
     >
       <h1>Phonebook</h1>
       <Section title="Add a contact">
-        <FormComponent
-          onFormSubmit={data => {
-            addContatcs([...contacts, data]);
-          }}
-          contacts={contacts}
-        />
+        <FormComponent />
       </Section>
-      {contacts.length > 0 && (
+      {stateContacts.length > 0 && (
         <Section title="Contacts">
-          <Filter
-            value={filter}
-            onChange={e => {
-              addFilter(e.target.value);
-            }}
-          />
-          <ContactList
-            data={filteredContacts}
-            onContactDelete={contactDeleteHandler}
-          />
+          <Filter />
+          <ContactList />
         </Section>
       )}
     </div>
