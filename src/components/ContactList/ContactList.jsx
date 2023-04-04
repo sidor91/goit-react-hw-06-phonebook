@@ -17,12 +17,12 @@ const ContactList = () => {
 
   return (
     <ListOfContacts>
-      {filteredContacts.map(contact => (
+      {filteredContacts.map(({id, name, number}) => (
         <Contact
-          key={contact.id}
-          name={contact.name}
-          number={contact.number}
-          id={contact.id}
+          key={id}
+          name={name}
+          number={number}
+          id={id}
         />
       ))}
     </ListOfContacts>

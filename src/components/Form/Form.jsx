@@ -11,16 +11,16 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
 
-const initialValues = { name: '', number: '' }
+const initialValues = { name: '', number: '' };
 const schema = yup.object({
   name: yup.string().required(),
   number: yup.string().required(),
 });
 
 const FormComponent = () => {
-   const stateContacts = useSelector(state => state.contacts.contacts);
+  const stateContacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
-  
+
   const handleSubmit = (values, { resetForm }) => {
     const isNameTaken = stateContacts.find(
       contact => contact.name === values.name
@@ -68,5 +68,3 @@ const FormComponent = () => {
 };
 
 export default FormComponent;
-
-
